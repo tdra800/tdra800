@@ -159,19 +159,23 @@ void TicTacToe::CpuUpdBrds()
 
 bool TicTacToe::CheckWinCond()
 {
-    bool WinDet = false;
+    ////////////////////////////////////////////////////////////////////////////////////
+    // Mapping for the values from the boxes to the location in the arrays
+    // 1 2 3 4 5 6  7  8  9       board values
+    // 0 2 4 5 7 9 10 12 14       array values
+
     // Check rows for victory
     //  Increments set to check row values in array
     for (int StartPtr = 0; StartPtr < 11; StartPtr += 5)
     {
-        if (DisplayBoard[StartPtr] == DisplayBoard[StartPtr + 2] && DisplayBoard[StartPtr + 2] == DisplayBoard[StartPtr + 4])
+        if (MarksBoard[StartPtr] == MarksBoard[StartPtr + 2] && MarksBoard[StartPtr + 2] == MarksBoard[StartPtr + 4])
         {
-            if (DisplayBoard[StartPtr] == 'X') // Check if player won
+            if (MarksBoard[StartPtr] == 'X') // Check if player won
             {
-                std::cout << "Victory!" << std::endl;
+                std::cout << "Victory! You Won!" << std::endl;
                 return true;
             }
-            else if (DisplayBoard[StartPtr] == 'O') // Check if CPU won
+            else if (MarksBoard[StartPtr] == 'O') // Check if CPU won
             {
                 std::cout << "Oh no! Defeat!" << std::endl;
                 return true;
@@ -182,20 +186,57 @@ bool TicTacToe::CheckWinCond()
     // Check cols for victory
     for (int StartPtr = 0; StartPtr < 11; StartPtr += 2)
     {
-        if (DisplayBoard[StartPtr] == DisplayBoard[StartPtr + 5] && DisplayBoard[StartPtr + 5] == DisplayBoard[StartPtr + 10])
+        if (MarksBoard[StartPtr] == MarksBoard[StartPtr + 5] && MarksBoard[StartPtr + 5] == MarksBoard[StartPtr + 10])
         {
-            if (DisplayBoard[StartPtr] == 'X')
+            if (MarksBoard[StartPtr] == 'X')
             {
-                std::cout << "Victory!" << std::endl; // Check if player won
+                std::cout << "Victory! You Won!" << std::endl; // Check if player won
                 return true;
             }
-            else if (DisplayBoard[StartPtr] == 'O') // Check if CPU won
+            else if (MarksBoard[StartPtr] == 'O') // Check if CPU won
             {
                 std::cout << "Oh no! Defeat!" << std::endl;
                 return true;
             }
         }
     }
+
+    // Check diag 1
+    int StartPtr = 0;
+    if (MarksBoard[StartPtr] == MarksBoard[StartPtr + 7] && MarksBoard[StartPtr + 7] == MarksBoard[StartPtr + 14])
+    {
+        if (MarksBoard[StartPtr] == 'X') // Check if player won
+        {
+            std::cout << "Victory! You Won!" << std::endl;
+            return true;
+        }
+        else if (MarksBoard[StartPtr] == 'O') // Check if CPU won
+        {
+            std::cout << "Oh no! Defeat!" << std::endl;
+            return true;
+        }
+    }
+
+    // Check diag 2
+    StartPtr = 4;
+    if (MarksBoard[StartPtr] == MarksBoard[StartPtr + 3] && MarksBoard[StartPtr + 3] == MarksBoard[StartPtr + 6])
+    {
+        if (MarksBoard[StartPtr] == 'X') // Check if player won
+        {
+            std::cout << "Victory! You Won!" << std::endl;
+            return true;
+        }
+        else if (MarksBoard[StartPtr] == 'O') // Check if CPU won
+        {
+            std::cout << "Oh no! Defeat!" << std::endl;
+            return true;
+        }
+    }
+    
+    // no win condition met
+    return false;
+
+
 }
 
 bool TicTacToe::BoardFull()
